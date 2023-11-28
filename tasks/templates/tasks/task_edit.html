@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% if form.instance.pk %}Edit Task{% else %}New Task{% endif %}</title>
+</head>
+<body>
+    <h2>{% if form.instance.pk %}Edit Task{% else %}New Task{% endif %}</h2>
+    <form method="post" action="{% if form.instance.pk %}{% url 'task_edit' pk=form.instance.pk %}{% else %}{% url 'task_new' %}{% endif %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% if form.instance.pk %}{% url 'task_detail' pk=form.instance.pk %}{% else %}{% url 'task_list' %}{% endif %}">Cancel</a>
+</body>
+</html>
